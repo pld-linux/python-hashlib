@@ -1,15 +1,16 @@
 %define		module	hashlib
 Summary:	Python secure hash and message digest module
 Name:		python-%{module}
-Version:	20060408a
+Version:	20081119
 Release:	1
 License:	PSF
 Group:		Libraries/Python
 Source0:	http://code.krypto.org/python/hashlib/hashlib-%{version}.tar.gz
-# Source0-md5:	7c8df988d2d467dae1f34251ec5d95bd
+# Source0-md5:	09dea11f5b826718d2032db210183d3c
 URL:		http://code.krypto.org/python/hashlib/
 BuildRequires:	python-devel < 1:2.5
 BuildRequires:	python-devel >= 1:2.4
+BuildRequires:	rpmbuild(macros) >= 1.219
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,11 +26,12 @@ SHA256, SHA384 and SHA512 (backported from Python 2.5).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__python} setup.py install \
 	--root=$RPM_BUILD_ROOT \
 	--install-lib=%{py_sitedir} \
 	--optimize=2
+
+%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
